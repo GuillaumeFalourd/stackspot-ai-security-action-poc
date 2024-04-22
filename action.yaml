@@ -1,0 +1,58 @@
+name: 'Runtime Manager Action'
+
+description: 'Runtime Manager Action'
+
+inputs:
+  CLIENT_ID:
+    description: Account client id
+    required: true
+  CLIENT_KEY:
+    description: Account client secret key
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v44
+      # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
+      # with:
+      #   since_last_remote_commit: true 
+    
+    - name: Check updated files
+      run: echo ${{ steps.changed-files.outputs.all_changed_files }}
+      shell: bash
+
+    - name: Setup Python
+      uses: actions/setup-python@v4.7.1
+      with:
+        python-version: '3.10' 
+
+    - name: Install python libraries 
+      run: pip install requests
+      shell: bash
+
+    - name: Start Self Hosted DEPLOY run with Runtime
+      id: deploy
+      env:
+        CLIENT_ID: ${{ inputs.CLIENT_ID }}
+        CLIENT_KEY: ${{ inputs.CLIENT_KEY }}
+        CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+      run: |
+        if [ ${{runner.os}} != 'Windows' ]; then
+          python3 ${{ github.action_path }}/sast-rqc.py
+        elif [ ${{runner.os}} == 'Windows' ]; then
+          python ${{ github.action_path }}\sast-rqc.py
+        else
+          echo "${{runner.os}} not supported"
+          exit 1
+        fi
+      shell: bash
+
+branding:
+    icon: 'terminal'
+    color: 'gray-dark'
