@@ -65,6 +65,7 @@ def get_execution_status(execution_id, access_token):
             time.sleep(5)  # Wait for 5 seconds before polling again
 
 CHANGED_FILES = os.getenv("CHANGED_FILES")
+print("Changed files:", CHANGED_FILES)
 
 for file_path in CHANGED_FILES:
     print(f'File Path: {file_path}')

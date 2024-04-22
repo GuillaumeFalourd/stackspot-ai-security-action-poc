@@ -39,9 +39,10 @@ runs:
     - name: Start Self Hosted DEPLOY run with Runtime
       id: deploy
       env:
+        ACTION_PATH: ${{ github.action_path }}
         CLIENT_ID: ${{ inputs.CLIENT_ID }}
         CLIENT_KEY: ${{ inputs.CLIENT_KEY }}
-        CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        CHANGED_FILES: ${{ fromJSON(steps.changed-files.outputs.all_changed_files) }}
       run: |
         if [ ${{runner.os}} != 'Windows' ]; then
           python3 ${{ github.action_path }}/sast-rqc.py
