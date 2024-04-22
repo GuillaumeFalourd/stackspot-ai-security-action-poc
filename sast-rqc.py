@@ -1,4 +1,5 @@
 import requests
+import ast
 import time
 import json
 import os
@@ -66,6 +67,8 @@ def get_execution_status(execution_id, access_token):
 
 CHANGED_FILES = os.getenv("CHANGED_FILES")
 print("Changed files:", CHANGED_FILES)
+
+CHANGED_FILES = ast.literal_eval(CHANGED_FILES)
 
 for file_path in CHANGED_FILES:
     print(f'File Path: {file_path}')
