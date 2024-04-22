@@ -16,3 +16,5 @@ jobs:
         with:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
+          ACCOUNT_SLUG: stackspot
+          QC_SLUG: sast-rqc
