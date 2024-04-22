@@ -5,13 +5,13 @@ import json
 import os
 
 # Step 1: Authentication to obtain access token
-def get_access_token(account_slug, client_id, client_secret):
+def get_access_token(account_slug, client_id, client_key):
     url = f"https://idm.stackspot.com/{account_slug}/oidc/oauth/token"
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
     data = {
         'client_id': client_id,
         'grant_type': 'client_credentials',
-        'client_secret': client_secret
+        'client_secret': client_key
     }
     response = requests.post(url, headers=headers, data=data)
     response_data = response.json()
@@ -78,7 +78,7 @@ for file_path in CHANGED_FILES:
 
     # Replace the placeholders with your actual data
     CLIENT_ID =  os.getenv("CLIENT_ID")
-    CLIENT_KEY = os.getenv("CLIENT_CLIENT_KEYSECRET")
+    CLIENT_KEY = os.getenv("CLIENT_KEY")
     ACCOUNT_SLUG = 'stackspot'
     QC_SLUG = 'sast-rqc'
     YOUR_DATA = file_content
