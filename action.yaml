@@ -9,6 +9,12 @@ inputs:
   CLIENT_KEY:
     description: Account client secret key
     required: true
+  ACCOUNT_SLUG:
+    description: Account slug
+    required: true
+  QC_SLUG:
+    description: Quick Command slug
+    required: true
 
 runs:
   using: "composite"
@@ -44,6 +50,8 @@ runs:
         ACTION_PATH: ${{ github.action_path }}
         CLIENT_ID: ${{ inputs.CLIENT_ID }}
         CLIENT_KEY: ${{ inputs.CLIENT_KEY }}
+        ACCOUNT_SLUG: ${{ inputs.ACCOUNT_SLUG }}
+        QC_SLUG: ${{ inputs.QC_SLUG }}
         CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
       run: |
         if [ ${{runner.os}} != 'Windows' ]; then

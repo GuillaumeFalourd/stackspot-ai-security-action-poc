@@ -71,7 +71,7 @@ print(f'\033[36mFiles to analyze: {CHANGED_FILES}\033[0m')
 CHANGED_FILES = ast.literal_eval(CHANGED_FILES)
 
 for file_path in CHANGED_FILES:
-    print(f'File Path: {file_path}')
+    print(f'\n\033[36mFile Path: {file_path}\033[0m')
     # Open the file and read its content
     with open(file_path, 'r') as file:
         file_content = file.read()
@@ -79,8 +79,8 @@ for file_path in CHANGED_FILES:
     # Replace the placeholders with your actual data
     CLIENT_ID =  os.getenv("CLIENT_ID")
     CLIENT_KEY = os.getenv("CLIENT_KEY")
-    ACCOUNT_SLUG = 'stackspot'
-    QC_SLUG = 'sast-rqc'
+    ACCOUNT_SLUG = os.getenv("ACCOUNT_SLUG")
+    QC_SLUG = os.getenv("QC_SLUG")
     YOUR_DATA = file_content
 
     # Execute the steps
@@ -93,7 +93,7 @@ for file_path in CHANGED_FILES:
     answer_data = json.loads(answer_str)
     vulnerabilities_amount = len(answer_data)
 
-    print(f"\nf'\033[36m{vulnerabilities_amount} item(s) have been found for file {file_path}:\033[0m")
+    print(f"\n\033[36m{vulnerabilities_amount} item(s) have been found for file {file_path}:\033[0m")
 
     # Iterate through each item and print the required fields
     for item in answer_data:
