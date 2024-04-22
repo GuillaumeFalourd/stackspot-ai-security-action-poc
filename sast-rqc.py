@@ -66,7 +66,7 @@ def get_execution_status(execution_id, access_token):
             time.sleep(5)  # Wait for 5 seconds before polling again
 
 CHANGED_FILES = os.getenv("CHANGED_FILES")
-print("Changed files:", CHANGED_FILES)
+print(f'\033[36mFiles to analyze: {CHANGED_FILES}\033[0m')
 
 CHANGED_FILES = ast.literal_eval(CHANGED_FILES)
 
@@ -93,7 +93,7 @@ for file_path in CHANGED_FILES:
     answer_data = json.loads(answer_str)
     vulnerabilities_amount = len(answer_data)
 
-    print(f"\n{vulnerabilities_amount} item(s) have been found for file {file_path}:")
+    print(f"\nf'\033[36m{vulnerabilities_amount} item(s) have been found for file {file_path}:\033[0m")
 
     # Iterate through each item and print the required fields
     for item in answer_data:
