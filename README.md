@@ -53,7 +53,7 @@ Field | Mandatory | Default Value | Observation
 
 ### SAST
 
-![](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/assets/22433243/aef6cbcd-0ed4-49ef-973e-6b24bd2e950b)
+![](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/assets/22433243/935c79b1-e86a-4738-ac0d-ba3be90d2dbb)
 
 #### Output
 
