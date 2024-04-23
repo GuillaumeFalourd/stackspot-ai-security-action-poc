@@ -65,9 +65,14 @@ def get_execution_status(execution_id, access_token):
             i+=1
             time.sleep(5)  # Wait for 5 seconds before polling again
 
+# Replace the placeholders with your actual data
+CLIENT_ID =  os.getenv("CLIENT_ID")
+CLIENT_KEY = os.getenv("CLIENT_KEY")
+ACCOUNT_SLUG = os.getenv("CLIENT_REALM")
+QC_SLUG = os.getenv("QC_SLUG")
 CHANGED_FILES = os.getenv("CHANGED_FILES")
-print(f'\033[36mFiles to analyze: {CHANGED_FILES}\033[0m')
 
+print(f'\033[36mFiles to analyze: {CHANGED_FILES}\033[0m')
 CHANGED_FILES = ast.literal_eval(CHANGED_FILES)
 
 for file_path in CHANGED_FILES:
@@ -76,23 +81,10 @@ for file_path in CHANGED_FILES:
     with open(file_path, 'r') as file:
         file_content = file.read()
 
-    # Replace the placeholders with your actual data
-    CLIENT_ID =  os.getenv("CLIENT_ID")
-    CLIENT_KEY = os.getenv("CLIENT_KEY")
-    ACCOUNT_SLUG = os.getenv("CLIENT_REALM")
-    QC_SLUG = os.getenv("QC_SLUG")
-    YOUR_DATA = file_content
-
     # Execute the steps
     access_token = get_access_token(ACCOUNT_SLUG, CLIENT_ID, CLIENT_KEY)
-    execution_id = create_rqc_execution(QC_SLUG, access_token, YOUR_DATA)
+    execution_id = create_rqc_execution(QC_SLUG, access_token, file_content)
     execution_status = get_execution_status(execution_id, access_token)
-
-    print(f'Execution Status: {execution_status}')
-
-    # # Extract the 'answer' field from the step_result (note: removing the leading and trailing ```json and ``` for correct JSON parsing)
-    # answer_str = execution_status['steps'][0]['step_result']['answer'][7:-3].replace('\\n', '\n').replace('\\"', '"')
-    # answer_data = json.loads(answer_str)
 
     result = execution_status['result']
 
