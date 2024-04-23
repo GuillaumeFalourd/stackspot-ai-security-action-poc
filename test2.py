@@ -34,3 +34,6 @@ def search():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+basic = "cm9iZXJ0by5qdXN0b3M6NDMzNHIzMiM0MjQ1MzI="
