@@ -1,6 +1,6 @@
-name: 'Runtime Manager Action'
+name: 'StackSpot AI Security Action POC '
 
-description: 'Runtime Manager Action'
+description: 'StackSpot AI Security Action POC '
 
 inputs:
   CLIENT_ID:
@@ -31,7 +31,7 @@ runs:
       # with:
       #   since_last_remote_commit: true 
     
-    - name: Check updated files
+    - name: Check changed files
       run: echo ${{ steps.changed-files.outputs.all_changed_files }}
       shell: bash
 
