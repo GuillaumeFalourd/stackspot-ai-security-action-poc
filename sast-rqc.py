@@ -100,3 +100,4 @@ for file_path in CHANGED_FILES:
         print(f"\nTitle: {item['title']}")
         print(f"Severity: {item['severity']}")
         print(f"Correction: {item['correction']}")
+        print(f"Lines: {item['lines']}")
