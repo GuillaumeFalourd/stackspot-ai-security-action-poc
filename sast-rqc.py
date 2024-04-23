@@ -100,7 +100,7 @@ for file_path in CHANGED_FILES:
     if result.startswith("```json"):
         result = result[7:-4].strip()
 
-    result_data = json.loads(result.replace('\\n', '\n').replace('\\"', '"'))
+    result_data = json.loads(result)
 
     vulnerabilities_amount = len(result_data)
 
