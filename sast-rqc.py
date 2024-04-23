@@ -88,12 +88,6 @@ for file_path in CHANGED_FILES:
     execution_id = create_rqc_execution(QC_SLUG, access_token, YOUR_DATA)
     execution_status = get_execution_status(execution_id, access_token)
 
-    print(f'Execution Status: {execution_status}')
-
-    # # Extract the 'answer' field from the step_result (note: removing the leading and trailing ```json and ``` for correct JSON parsing)
-    # answer_str = execution_status['steps'][0]['step_result']['answer'][7:-3].replace('\\n', '\n').replace('\\"', '"')
-    # answer_data = json.loads(answer_str)
-
     result = execution_status['result']
 
     # Remove the leading and trailing ```json and ``` for correct JSON parsing
