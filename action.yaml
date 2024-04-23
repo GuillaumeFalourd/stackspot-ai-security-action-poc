@@ -1,6 +1,6 @@
-name: 'Runtime Manager Action'
+name: 'StackSpot AI Security Action POC '
 
-description: 'Runtime Manager Action'
+description: 'StackSpot AI Security Action POC '
 
 inputs:
   CLIENT_ID:
@@ -31,7 +31,7 @@ runs:
       # with:
       #   since_last_remote_commit: true 
     
-    - name: Check updated files
+    - name: Check changed files
       run: echo ${{ steps.changed-files.outputs.all_changed_files }}
       shell: bash
 
@@ -44,10 +44,8 @@ runs:
       run: pip install requests
       shell: bash
 
-    - name: Start Self Hosted DEPLOY run with Runtime
-      id: deploy
+    - name: Run SAST Remote Quick Command
       env:
-        ACTION_PATH: ${{ github.action_path }}
         CLIENT_ID: ${{ inputs.CLIENT_ID }}
         CLIENT_KEY: ${{ inputs.CLIENT_KEY }}
         CLIENT_REALM: ${{ inputs.CLIENT_REALM }}
