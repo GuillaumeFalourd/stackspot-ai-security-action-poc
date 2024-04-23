@@ -2,15 +2,24 @@
 
 StackSpot AI Security Action POC working on all operating system.
 
-This action identify vulnerabilities (SAST check) on files updated compared to the repository `main` branch.
+This action identify vulnerabilities (SAST check) using StackSpot AI Remote Quick Command concept.
 
-_Note: This action solely identifies files that have changed for events such as pull_request*, push, merge_group, release, ... However, it doesn't detect pending uncommitted changes created during the workflow execution._
+It returns a list of vulnerabilities for each file, following the structure below:
+```
+[
+  {
+    "title": "<TITLE>",
+    "severiity": "<SEVERITY>",
+    "correction": "<CORRECTION>",
+    "lines": "<LINES>"
+  }
+]
+```
+_Note: This action solely identifies files that have changed for events such as pull_request*, push, merge_group, release, etc (potentially the same events referred [here](https://github.com/tj-actions/changed-files?tab=readme-ov-file#examples-)). However, it doesn't detect pending uncommitted changes created during the workflow execution._
 
 ## Usage
 
 ```yaml
-name: Action Test Ubuntu
-
 on:
   pull_request:
 
