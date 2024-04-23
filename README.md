@@ -1,6 +1,8 @@
 # stackspot-ai-security-action-poc
 
-StackSpot AI Security Action POC working on all operating system.
+[![Action Test Ubuntu](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/actions/workflows/action-test-ubuntu.yaml/badge.svg)](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/actions/workflows/action-test-ubuntu.yaml)
+
+StackSpot AI Security Action POC
 
 This action identify vulnerabilities (SAST check) using StackSpot AI Remote Quick Command concept.
 
