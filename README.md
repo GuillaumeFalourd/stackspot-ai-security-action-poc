@@ -71,3 +71,7 @@ TODO
 - [ ] Add comment on PR.
 - [ ] Generate vulnerability report.
 - [ ] Add an action configuration file.
+
+## Observations
+
+To run any StackSpot AI remote quick command, please check [https://github.com/GuillaumeFalourd/stackspot-ai-rqc](https://github.com/GuillaumeFalourd/stackspot-ai-rqc).
