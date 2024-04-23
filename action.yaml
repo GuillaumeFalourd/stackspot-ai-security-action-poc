@@ -9,7 +9,7 @@ inputs:
   CLIENT_KEY:
     description: Account client secret key
     required: true
-  ACCOUNT_SLUG:
+  CLIENT_REALM:
     description: Account slug
     required: true
   QC_SLUG:
@@ -50,7 +50,7 @@ runs:
         ACTION_PATH: ${{ github.action_path }}
         CLIENT_ID: ${{ inputs.CLIENT_ID }}
         CLIENT_KEY: ${{ inputs.CLIENT_KEY }}
-        ACCOUNT_SLUG: ${{ inputs.ACCOUNT_SLUG }}
+        CLIENT_REALM: ${{ inputs.CLIENT_REALM }}
         QC_SLUG: ${{ inputs.QC_SLUG }}
         CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
       run: |

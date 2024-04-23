@@ -20,5 +20,5 @@ Field | Mandatory | Default Value | Observation
 ------------ | ------------  | ------------- | -------------
 **CLIENT_ID** | YES | N/A | [StackSpot](https://stackspot.com/en/settings/access-token) Client ID.
 **CLIENT_KEY** | YES | N/A |[StackSpot](https://stackspot.com/en/settings/access-token) Client KEY.
-**ACCOUNT_SLUG** | YES | N/A |[StackSpot](https://stackspot.com/en/settings/access-token) Client Realm.
+**CLIENT_REALM** | YES | N/A |[StackSpot](https://stackspot.com/en/settings/access-token) Client Realm.
 **QC_SLUG** | YES | N/A | [StackSpot Remote Quick Command reference](https://ai.stackspot.com/docs/pt-br/quick-commands/create-remote-qc)

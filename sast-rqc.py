@@ -79,7 +79,7 @@ for file_path in CHANGED_FILES:
     # Replace the placeholders with your actual data
     CLIENT_ID =  os.getenv("CLIENT_ID")
     CLIENT_KEY = os.getenv("CLIENT_KEY")
-    ACCOUNT_SLUG = os.getenv("ACCOUNT_SLUG")
+    ACCOUNT_SLUG = os.getenv("CLIENT_REALM")
     QC_SLUG = os.getenv("QC_SLUG")
     YOUR_DATA = file_content
 
