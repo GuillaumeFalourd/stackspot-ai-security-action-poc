@@ -88,15 +88,26 @@ for file_path in CHANGED_FILES:
     execution_id = create_rqc_execution(QC_SLUG, access_token, YOUR_DATA)
     execution_status = get_execution_status(execution_id, access_token)
 
-    # Extract the 'answer' field from the step_result (note: removing the leading and trailing ```json and ``` for correct JSON parsing)
-    answer_str = execution_status['steps'][0]['step_result']['answer'][7:-3].replace('\\n', '\n').replace('\\"', '"')
-    answer_data = json.loads(answer_str)
-    vulnerabilities_amount = len(answer_data)
+    print(f'Execution Status: {execution_status}')
+
+    # # Extract the 'answer' field from the step_result (note: removing the leading and trailing ```json and ``` for correct JSON parsing)
+    # answer_str = execution_status['steps'][0]['step_result']['answer'][7:-3].replace('\\n', '\n').replace('\\"', '"')
+    # answer_data = json.loads(answer_str)
+
+    result = execution_status['result']
+
+    # Remove the leading and trailing ```json and ``` for correct JSON parsing
+    if result.startswith("```json"):
+        result = result[7:-4].strip()
+
+    result_data = json.loads(result.replace('\\n', '\n').replace('\\"', '"'))
+
+    vulnerabilities_amount = len(result_data)
 
     print(f"\n\033[36m{vulnerabilities_amount} item(s) have been found for file {file_path}:\033[0m")
 
     # Iterate through each item and print the required fields
-    for item in answer_data:
+    for item in result_data:
         print(f"\nTitle: {item['title']}")
         print(f"Severity: {item['severity']}")
         print(f"Correction: {item['correction']}")
