@@ -10,7 +10,7 @@ StackSpot AI Security Action POC working on all operating system.
   with:
     CLIENT_ID: ${{ secrets.CLIENT_ID }}
     CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
-    ACCOUNT_SLUG: stackspot
+    CLIENT_REALM: stackspot
     QC_SLUG: sast-rqc
 ```
 
