@@ -2,16 +2,33 @@
 
 StackSpot AI Security Action POC working on all operating system.
 
+This action identify vulnerabilities (SAST check) on files updated compared to the repository `main` branch.
+
+_Note: This action solely identifies files that have changed for events such as pull_request*, push, merge_group, release, ... However, it doesn't detect pending uncommitted changes created during the workflow execution._
+
 ## Usage
 
 ```yaml
-- uses: GuillaumeFalourd/stackspot-ai-security-action-poc@main
-  id: run
-  with:
-    CLIENT_ID: ${{ secrets.CLIENT_ID }}
-    CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
-    CLIENT_REALM: stackspot
-    QC_SLUG: sast-rqc
+name: Action Test Ubuntu
+
+on:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: GuillaumeFalourd/stackspot-ai-security-action-poc@main
+        id: run
+        with:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
+          CLIENT_REALM: stackspot
+          QC_SLUG: sast-rqc
 ```
 
 ## ▶️ Action Inputs
@@ -31,7 +48,7 @@ Field | Mandatory | Default Value | Observation
 
 #### Output
 
-![](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/assets/22433243/01269c32-5614-436d-ae63-486a7fa6b1f5)
+![](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/assets/22433243/b6fee6a9-c968-4a5e-91dc-d65d3b393286)
 
 ### DAST
 
