@@ -68,7 +68,7 @@ runs:
       with:
         issue-number: ${{ github.event.number }}
         body: |
-          ${{ steps.rqc.outputs.result_data }}
+          ${{ steps.rqc.outputs.result }}
         reactions: '+1'
 
 branding:
