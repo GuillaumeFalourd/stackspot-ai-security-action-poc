@@ -4,6 +4,10 @@ import time
 import json
 import os
 
+def save_output(name: str, value: str):
+    with open(os.environ['GITHUB_OUTPUT'], 'a') as output_file:
+        print(f'{name}={value}', file=output_file)
+
 # Step 1: Authentication to obtain access token
 def get_access_token(account_slug, client_id, client_key):
     url = f"https://idm.stackspot.com/{account_slug}/oidc/oauth/token"
@@ -104,3 +108,5 @@ for file_path in CHANGED_FILES:
         print(f"Severity: {item['severity']}")
         print(f"Correction: {item['correction']}")
         print(f"Lines: {item['lines']}")
+
+    save_output('result', result_data)
