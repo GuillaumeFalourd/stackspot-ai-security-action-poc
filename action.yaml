@@ -45,6 +45,7 @@ runs:
       shell: bash
 
     - name: Run SAST Remote Quick Command
+      id: rqc
       env:
         CLIENT_ID: ${{ inputs.CLIENT_ID }}
         CLIENT_KEY: ${{ inputs.CLIENT_KEY }}
@@ -61,6 +62,14 @@ runs:
           exit 1
         fi
       shell: bash
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.number }}
+          body: |
+            ${{ steps.rqc.outputs.result_data }}
+          reactions: '+1'
 
 branding:
     icon: 'terminal'
