@@ -3,7 +3,7 @@ from flask import Flask, request, render_template_string
 
 app = Flask(__name__)
 
-# SQL Injection Vulnerability test2 0
+# SQL Injection Vulnerability test2 1
 @app.route('/login')
 def login():
     username = request.args.get('username')
