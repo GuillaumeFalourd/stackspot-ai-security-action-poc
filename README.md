@@ -29,6 +29,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: # mandatory to add comment on PR
+  issues: write
+  pull-requests: write
+
 jobs:
   security:
     runs-on: ubuntu-latest
@@ -68,7 +72,7 @@ TODO
 ## Roadmap tasks
 
 - [ ] DAST RQC.
-- [ ] Add comment on PR.
+- [x] Add comment on PR.
 - [ ] Generate vulnerability report.
 - [ ] Add an action configuration file.
 

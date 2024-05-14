@@ -109,4 +109,5 @@ for file_path in CHANGED_FILES:
         print(f"Correction: {item['correction']}")
         print(f"Lines: {item['lines']}")
 
-    save_output('result', result_data)
+    if len(result_data) > 0:
+        save_output('result', result_data)

@@ -65,6 +65,7 @@ runs:
 
     - name: Create comment
       uses: peter-evans/create-or-update-comment@v4
+      if: ${{ steps.rqc.outputs.result != '' }}
       with:
         issue-number: ${{ github.event.number }}
         body: |
@@ -72,7 +73,7 @@ runs:
           ```
           ${{ steps.rqc.outputs.result }}
           ```
-        reactions: '+1'
+        reactions: 'eyes'
 
 branding:
     icon: 'terminal'
