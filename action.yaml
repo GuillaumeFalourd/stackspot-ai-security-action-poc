@@ -68,7 +68,10 @@ runs:
       with:
         issue-number: ${{ github.event.number }}
         body: |
+          Identified security vulnerabilities through `stackspot-ai-security-action-poc` action:
+          ```
           ${{ steps.rqc.outputs.result }}
+          ```
         reactions: '+1'
 
 branding:
