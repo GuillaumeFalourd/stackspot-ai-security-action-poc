@@ -24,9 +24,9 @@ jobs:
           QC_SLUG: sast-rqc
 
       - name: Push generated report
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit -m "add new vulnerability report file"
-          git push origin ${{github.head_ref}}
+        uses: GuillaumeFalourd/git-commit-push@v1.3
+        with:
+          email: ${{ github.actor }}@users.noreply.github.com
+          name: ${{ github.actor }}
+          access_token: ${{ github.ACCESS_TOKEN }}
+          target_branch: ${{github.head_ref}}
