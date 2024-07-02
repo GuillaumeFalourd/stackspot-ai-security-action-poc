@@ -22,3 +22,6 @@ jobs:
           CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
           CLIENT_REALM: stackspot
           QC_SLUG: sast-rqc
+
+      - name: Commit and Push new file
+        uses: GuillaumeFalourd/git-commit-push@v1.3
