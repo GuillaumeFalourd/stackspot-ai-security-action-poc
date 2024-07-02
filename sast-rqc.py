@@ -14,24 +14,12 @@ def json_to_csv(json_data, csv_file_path):
         
         # Write the header if the file is empty
         if csv_file.tell() == 0:
-            header = [
-                "lines_of_code", "complexity_score", "cyclomatic_complexity", "maintainability_index",
-                "function_name", "function_complexity_score", "function_cyclomatic_complexity", "function_maintainability_index"
-            ]
+            header = ["title", "severity", "correction", "lines"]
             writer.writerow(header)
         
         # Write the data
-        for function in json_data['functions']:
-            row = [
-                json_data['lines_of_code'],
-                json_data['complexity_score'],
-                json_data['cyclomatic_complexity'],
-                json_data['maintainability_index'],
-                function['function_name'],
-                function['complexity_score'],
-                function['cyclomatic_complexity'],
-                function['maintainability_index']
-            ]
+        for item in json_data:
+            row = [item['title'], item['severity'], item['correction'], item['lines']]
             writer.writerow(row)
 
 def save_output(name: str, value: str):
