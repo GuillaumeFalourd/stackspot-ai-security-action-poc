@@ -23,10 +23,5 @@ jobs:
           CLIENT_REALM: stackspot
           QC_SLUG: sast-rqc
 
-      - name: Push generated report
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit -m "add new vulnerability report file"
-          git push https://x-access-token:${{ secrets.ACCESS_TOKEN }}@github.com/${{github.repository}}.git HEAD:${{ github.head_ref }}
+      - name: Check generated report
+        run: cat ${{ steps.run.outputs.report_file }} report_file
