@@ -28,5 +28,5 @@ jobs:
         with:
           email: ${{ github.actor }}@users.noreply.github.com
           name: ${{ github.actor }}
-          access_token: ${{ github.token }}
+          access_token: ${{ github.ACCESS_TOKEN }}
           target_branch: ${{github.head_ref}}
