@@ -7,19 +7,31 @@ import time
 import json
 import os
 
-def json_to_csv(json_data, csv_file_path):
+def create_report():
+    directory = 'vulnerability_reports'
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    current_date = datetime.datetime.now()
+    current_date_format = current_date.strftime("%m-%d-%Y-%Hh%M")
+    current_date_format_string = str(current_date_format)
+    file_name = "vulnerabilities-" + current_date_format_string + ".csv"
+    file_path = os.path.join(directory, file_name)
+    return file_path
+
+def json_to_csv(file_path, json_data, csv_file_path):
     # Open the CSV file in append mode
     with open(csv_file_path, mode='a', newline='') as csv_file:
         writer = csv.writer(csv_file)
         
         # Write the header if the file is empty
         if csv_file.tell() == 0:
-            header = ["title", "severity", "correction", "lines"]
+            header = ["file", "title", "severity", "correction", "lines"]
             writer.writerow(header)
         
         # Write the data
         for item in json_data:
-            row = [item['title'], item['severity'], item['correction'], item['lines']]
+            row = [file_path, item['title'], item['severity'], item['correction'], item['lines']]
             writer.writerow(row)
 
 def save_output(name: str, value: str):
@@ -96,54 +108,44 @@ CHANGED_FILES = os.getenv("CHANGED_FILES")
 
 print(f'\033[36mFiles to analyze: {CHANGED_FILES}\033[0m')
 CHANGED_FILES = ast.literal_eval(CHANGED_FILES)
+all_result = []
+report_path = create_report()
+try:
+    for file_path in CHANGED_FILES:
+        print(f'\n\033[36mFile Path: {file_path}\033[0m')
+        # Open the file and read its content
+        with open(file_path, 'r') as file:
+            file_content = file.read()
 
-for file_path in CHANGED_FILES:
-    print(f'\n\033[36mFile Path: {file_path}\033[0m')
-    # Open the file and read its content
-    with open(file_path, 'r') as file:
-        file_content = file.read()
+        # Execute the steps
+        access_token = get_access_token(ACCOUNT_SLUG, CLIENT_ID, CLIENT_KEY)
+        execution_id = create_rqc_execution(QC_SLUG, access_token, file_content)
+        execution_status = get_execution_status(execution_id, access_token)
 
-    # Execute the steps
-    access_token = get_access_token(ACCOUNT_SLUG, CLIENT_ID, CLIENT_KEY)
-    execution_id = create_rqc_execution(QC_SLUG, access_token, file_content)
-    execution_status = get_execution_status(execution_id, access_token)
+        result = execution_status['result']
 
-    result = execution_status['result']
+        # Remove the leading and trailing ```json and ``` for correct JSON parsing
+        if result.startswith("```json"):
+            result = result[7:-4].strip()
 
-    # Remove the leading and trailing ```json and ``` for correct JSON parsing
-    if result.startswith("```json"):
-        result = result[7:-4].strip()
+        result_data = json.loads(result)
 
-    result_data = json.loads(result)
+        vulnerabilities_amount = len(result_data)
 
-    vulnerabilities_amount = len(result_data)
+        print(f"\n\033[36m{vulnerabilities_amount} item(s) have been found for file {file_path}:\033[0m")
 
-    print(f"\n\033[36m{vulnerabilities_amount} item(s) have been found for file {file_path}:\033[0m")
+        # Iterate through each item and print the required fields
+        for item in result_data:
+            print(f"\nTitle: {item['title']}")
+            print(f"Severity: {item['severity']}")
+            print(f"Correction: {item['correction']}")
+            print(f"Lines: {item['lines']}")
 
-    # Iterate through each item and print the required fields
-    for item in result_data:
-        print(f"\nTitle: {item['title']}")
-        print(f"Severity: {item['severity']}")
-        print(f"Correction: {item['correction']}")
-        print(f"Lines: {item['lines']}")
-
-    if len(result_data) > 0:
-        save_output('result', result_data)
-    
-    try:
-        directory = 'vulnerabilities_report'
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-        
-        current_date = datetime.datetime.now()
-        current_date_format = current_date.strftime("%m-%d-%Y-%Hh%M")
-        current_date_format_string = str(current_date_format)
-        file_name = "vulnerabilities-" + current_date_format_string + ".csv"
-        file_path = os.path.join(directory, file_name)
-        
-        json_to_csv(result_data, file_path)
-        
-    except OSError as e:
-        print(f"An error occurred while creating the directory or file: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        if len(result_data) > 0:
+            save_output('result', result_data)
+            json_to_csv(file_path, result_data, report_path)
+            
+except OSError as e:
+    print(f"An error occurred while creating the directory or file: {e}")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
