@@ -144,6 +144,7 @@ try:
         if len(result_data) > 0:
             save_output('result', result_data)
             json_to_csv(file_path, result_data, report_path)
+            save_output('report_file', report_path)
             
 except OSError as e:
     print(f"An error occurred while creating the directory or file: {e}")
