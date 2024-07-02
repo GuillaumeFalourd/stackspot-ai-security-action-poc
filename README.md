@@ -1,6 +1,6 @@
 # stackspot-ai-security-action-poc
 
-[![Action Test Ubuntu](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/actions/workflows/action-test-ubuntu.yaml/badge.svg)](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/actions/workflows/action-test-ubuntu.yaml)
+[![Action Test Ubuntu](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/actions/workflows/action-test-ubuntu.yaml/badge.svg)](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/actions/workflows/action-test-ubuntu.yaml) [![Daily action Test](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/actions/workflows/daily-action-test.yaml/badge.svg)](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/actions/workflows/daily-action-test.yaml)
 
 StackSpot AI Security Action POC
 
