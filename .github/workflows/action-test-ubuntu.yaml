@@ -25,3 +25,5 @@ jobs:
 
       - name: Commit and Push new file
         uses: GuillaumeFalourd/git-commit-push@v1.3
+        with:
+          target_branch: test
