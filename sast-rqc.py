@@ -141,12 +141,21 @@ for file_path in CHANGED_FILES:
 
     if len(result_data) > 0:
         save_output('result', result_data)
-        directory='vulnerabilities_report'
+    
+    try:
+        directory = 'vulnerabilities_report'
         if not os.path.exists(directory):
             os.makedirs(directory)
+        
         current_date = datetime.datetime.now()
         current_date_format = current_date.strftime("%m-%d-%Y-%Hh%M")
         current_date_format_string = str(current_date_format)
         file_name = "vulnerabilities-" + current_date_format_string + ".csv"
         file_path = os.path.join(directory, file_name)
+        
         json_to_csv(result_data, file_path)
+        
+    except OSError as e:
+        print(f"An error occurred while creating the directory or file: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
