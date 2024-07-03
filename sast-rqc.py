@@ -33,11 +33,6 @@ def csv_to_markdown_table(csv_file_path):
 
     return markdown_table
 
-# Assuming the CSV file path is passed as an argument
-import sys
-csv_file_path = sys.argv[1]
-markdown_table = csv_to_markdown_table(csv_file_path)
-
 def json_to_csv(file_path, json_data, csv_file_path):
     # Open the CSV file in append mode
     with open(csv_file_path, mode='a', newline='') as csv_file:
