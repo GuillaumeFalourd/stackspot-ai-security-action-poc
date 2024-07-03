@@ -19,6 +19,25 @@ def create_report():
     file_path = os.path.join(directory, file_name)
     return file_path
 
+def csv_to_markdown_table(csv_file_path):
+    with open(csv_file_path, 'r') as file:
+        reader = csv.reader(file)
+        headers = next(reader)
+        rows = [row for row in reader]
+
+    # Create markdown table
+    markdown_table = '| ' + ' | '.join(headers) + ' |\n'
+    markdown_table += '| ' + ' | '.join(['---'] * len(headers)) + ' |\n'
+    for row in rows:
+        markdown_table += '| ' + ' | '.join(row) + ' |\n'
+
+    return markdown_table
+
+# Assuming the CSV file path is passed as an argument
+import sys
+csv_file_path = sys.argv[1]
+markdown_table = csv_to_markdown_table(csv_file_path)
+
 def json_to_csv(file_path, json_data, csv_file_path):
     # Open the CSV file in append mode
     with open(csv_file_path, mode='a', newline='') as csv_file:
@@ -145,8 +164,13 @@ try:
             save_output('result', result_data)
             json_to_csv(file_path, result_data, report_path)
             save_output('report_file', report_path)
-            
+
+    markdown_table = csv_to_markdown_table(report_path)
+    save_output('report_table', report_path)
+
 except OSError as e:
     print(f"An error occurred while creating the directory or file: {e}")
+    exit(1)
 except Exception as e:
     print(f"An unexpected error occurred: {e}")
+    exit(1)
