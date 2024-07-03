@@ -22,6 +22,3 @@ jobs:
           CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
           CLIENT_REALM: stackspot
           QC_SLUG: sast-rqc
-
-      - name: Check generated report
-        run: cat ${{ steps.run.outputs.report_file }} report_file
