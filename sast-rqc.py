@@ -50,7 +50,9 @@ def json_to_csv(file_path, json_data, csv_file_path):
 
 def save_output(name: str, value: str):
     with open(os.environ['GITHUB_OUTPUT'], 'a') as output_file:
-        print(f'{name}={value}', file=output_file)
+        print(f'{name}<<EOF', file=output_file)
+        print(value, file=output_file)
+        print('EOF', file=output_file)
 
 # Step 1: Authentication to obtain access token
 def get_access_token(account_slug, client_id, client_key):
