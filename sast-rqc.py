@@ -161,7 +161,7 @@ try:
             save_output('report_file', report_path)
 
     markdown_table = csv_to_markdown_table(report_path)
-    save_output('report_table', report_path)
+    save_output('report_table', markdown_table)
 
 except OSError as e:
     print(f"An error occurred while creating the directory or file: {e}")
