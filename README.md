@@ -73,7 +73,7 @@ TODO
 
 - [ ] DAST RQC.
 - [x] Add comment on PR.
-- [ ] Generate vulnerability report.
+- [x] Generate vulnerability report ([example](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/pull/1#issuecomment-2208860075))
 - [ ] Add an action configuration file.
 
 ## Observations
