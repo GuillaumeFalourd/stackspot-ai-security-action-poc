@@ -1,9 +1,9 @@
 import sqlite3
+import pickle
 from flask import Flask, request, render_template_string
 
 app = Flask(__name__)
 
-# SQL Injection Vulnerability test1 1
 @app.route('/login')
 def login():
     username = request.args.get('username')
@@ -12,7 +12,6 @@ def login():
     conn = sqlite3.connect('users.db')
     cursor = conn.cursor()
 
-    # Vulnerable query (susceptible to SQL Injection)
     query = "SELECT * FROM users WHERE username='" + username + "' AND password='" + password + "'"
     cursor.execute(query)
     user = cursor.fetchone()
@@ -24,13 +23,17 @@ def login():
     else:
         return "Invalid credentials."
 
-# Cross-Site Scripting (XSS) Vulnerability
 @app.route('/search')
 def search():
     query = request.args.get('query')
-
-    # Vulnerable code (XSS)
     return render_template_string('<h1>Search results for: {{ query }}</h1>', query=query)
+
+@app.route('/load')
+def load():
+    data = request.args.get('data')
+    obj = pickle.loads(data.encode())
+    return f"Loaded object: {obj}"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
