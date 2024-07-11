@@ -63,7 +63,12 @@ Field | Mandatory | Default Value | Observation
 
 #### Output
 
+Pipeline
 ![](https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/assets/22433243/b6fee6a9-c968-4a5e-91dc-d65d3b393286)
+
+PR comment
+<img width="766" alt="Screenshot 2024-07-11 at 08 20 09" src="https://github.com/GuillaumeFalourd/stackspot-ai-security-action-poc/assets/22433243/04487d1a-ba30-4c31-a78b-8df0e24395b4">
+
 
 ### DAST
 
